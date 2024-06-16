@@ -1,4 +1,5 @@
-from core.lib.src.engine_structs import *
+from engine_structs import *
+
 
 class Engine:
     def __init__(self) -> None:

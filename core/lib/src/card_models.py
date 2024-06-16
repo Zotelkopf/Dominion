@@ -1,4 +1,3 @@
-from typing import ClassVar
 from enum import Enum
 
 Set = Enum('Set', ['Null', 'Baseset', 'Baseset1', 'Baseset2', 'Intrigue', 'Prosperity',  'Seaside', 'Alchemy', 'Nocturne', 'Plunder'])

@@ -1,6 +1,6 @@
 from typing import Self
 from random import shuffle
-from core.lib.src.card_models import *
+from card_models import *
 
 
 class Cardbuffer:
