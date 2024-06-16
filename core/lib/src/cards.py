@@ -1,5 +1,4 @@
 from card_models import *
-from core.lib.src.card_models import Set
 
 # Basic Supply Cards
 
