@@ -3,6 +3,12 @@ from enum import Enum
 Set = Enum('Set', ['Null', 'Baseset', 'Baseset1', 'Baseset2', 'Intrigue', 'Prosperity',  'Seaside', 'Alchemy', 'Nocturne', 'Plunder'])
 
 class Card:
+    _self = None
+    def __new__(cls):
+        if cls._self is None:
+            cls._self = super().__new__(cls)
+        return cls._self
+
     def __init__(self, name: str, cost: int, set: Set) -> None:
         self.name = name
         self.cost = cost
