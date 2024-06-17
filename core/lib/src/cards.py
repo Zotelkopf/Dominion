@@ -1,6 +1,14 @@
 from card_models import *
+from core.lib.src.card_models import Set
 
 # Basic Supply Cards
+
+class Potion(Treasure):
+    def __init__(self) -> None:
+        super().__init__('Trank', 4, 0, Set.Alchemy)
+
+    def getSupplyCount(self, playerCount: int) -> int:
+        return 16
 
 class Copper(Treasure):
     def __init__(self) -> None:
