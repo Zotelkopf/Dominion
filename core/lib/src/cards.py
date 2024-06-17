@@ -6,6 +6,7 @@ from core.lib.src.card_models import Set
 class Potion(Treasure):
     def __init__(self) -> None:
         super().__init__('Trank', 4, 0, Set.Alchemy)
+        self.requiresPotion: bool = False
 
     def getSupplyCount(self, playerCount: int) -> int:
         return 16
@@ -33,7 +34,7 @@ class Gold(Treasure):
     
 class Platinum(Treasure):
     def __init__(self) -> None:
-        super().__init__('Platin', 9, 5, Set.Baseset)
+        super().__init__('Platin', 9, 5, Set.Prosperity)
 
     def getSupplyCount(self) -> int:
         return 12
