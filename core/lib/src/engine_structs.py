@@ -1,7 +1,9 @@
+import math
 from typing import Self, Callable
 from random import shuffle
 from card_models import *
 from cards import *
+
 
 
 class EmptySupplyExpection(Exception):
@@ -153,15 +155,31 @@ class Supply:
     
 
 class CardConditions:
-    def __init__(self) -> None:
-        self.expansions: list[Set] = []
-        self.minExpansions: int = 0
-        self.maxExpansions: int = 0
-        self.minCost: int = 0
-        self.maxCost: int = 0
+    def __init__(self, sets: list[Set] = [], minExpansions: int = 0, maxExpansions: int = 0, 
+                 minCost: int = -1, maxCost: int = math.inf, requiredCards: list[Card] = [], 
+                 bannedCards: list[Card] = []) -> None:
+        self.sets: list[Set] = sets
+        self.minExpansions: int = minExpansions
+        self.maxExpansions: int = maxExpansions
+        self.minCost: int = minCost
+        self.maxCost: int = maxCost
+        self.requiredCards: list[Card] = requiredCards
+        self.bannedCards: list[Card] = bannedCards
 
-    def allowsFor(card: Card) -> bool:
-        pass
+
+    def allowsFor(self, card: Card) -> bool:
+        if card in self.bannedCards: 
+            return False
+        if self.requiredCards and not card in self.requiredCards:
+            return False
+        if self.sets and not card.set in self.sets:
+            return False
+        cost: int = card.recalculateCost()
+        if cost < self.minCost:
+            return False
+        if cost > self.maxCost:
+            return False
+        return True
 
 
 
