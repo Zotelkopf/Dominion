@@ -1,18 +1,19 @@
 from enum import Enum
+from typing import Self
 
 Set = Enum('Set', ['Null', 'Baseset', 'Baseset1', 'Baseset2', 'Intrigue', 'Prosperity',  'Seaside', 'Alchemy', 'Nocturne', 'Plunder'])
 
 class Card:
-    _self = None
+    _self: Self | None = None
     def __new__(cls):
         if cls._self is None:
             cls._self = super().__new__(cls)
         return cls._self
 
     def __init__(self, name: str, cost: int, set: Set) -> None:
-        self.name = name
-        self.cost = cost
-        self.set = set
+        self.name: str = name
+        self.cost: int = cost
+        self.set: Set = set
         
     def __str__(self) -> str:
         return self.name
@@ -32,6 +33,9 @@ class Card:
     async def onDiscard(self) -> None:
         pass
 
+    async def onCleanUp(self) -> None:
+        pass    
+
     async def onTrash(self) -> None:
         pass
 
@@ -39,7 +43,7 @@ class Card:
 class Victory(Card):
     def __init__(self, name: str, cost: int, points: int, set: Set) -> None:
         super().__init__(name, cost, set)
-        self.points = points
+        self.points: int = points
         
     def getPoints(self) -> int:
         return self.points
@@ -51,7 +55,7 @@ class Victory(Card):
 class Curse(Card):
     def __init__(self, name: str, cost: int, set: Set) -> None:
         super().__init__(name, cost, set)
-        self.points = -1
+        self.points: int = -1
 
     def getPoints(self) -> int:
         return self.points
@@ -63,7 +67,7 @@ class Curse(Card):
 class Treasure(Card):
     def __init__(self, name: str, cost: int, value: int, set: Set) -> None:
         super().__init__(name, cost, set)
-        self.value = 0
+        self.value: int = 0
 
     def getValue(self) -> int:
         return self.value
