@@ -1,12 +1,12 @@
 from engine_structs import *
 
 
-class Engine:
+class GameEngine:
     def __init__(self) -> None:
         self.trashPile = Cardbuffer()
         self.supply = Supply()
 
-        self.gameover = False
+        self.gameOver = False
 
         self.players = []
 
