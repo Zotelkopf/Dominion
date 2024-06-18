@@ -18,7 +18,7 @@ class Card:
     def __str__(self) -> str:
         return self.name
     
-    def recalculateCost(self) -> None:
+    def calculateCost(self) -> None:
         pass 
 
     def getSupplyCount(self) -> int:
