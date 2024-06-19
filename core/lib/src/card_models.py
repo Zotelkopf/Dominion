@@ -49,7 +49,9 @@ class Victory(Card):
         return self.points
         
     def getSupplyCount(self, playerCount: int) -> int:
-        return 8 if playerCount == 2 else 12
+        if playerCount == 2:
+            return 8
+        return 12
 
 
 class Curse(Card):

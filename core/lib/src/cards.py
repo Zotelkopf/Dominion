@@ -1,5 +1,4 @@
-from card_models import *
-from core.lib.src.card_models import Set
+from card_models import Card, Treasure, Victory, Curse, Action, Attack, Reaction, Set
 
 # Basic Supply Cards
 
