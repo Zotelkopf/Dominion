@@ -27,13 +27,13 @@ class Player:
 
     def hasActions(self) -> bool:
         for card in self.hand:
-            if card is Action:
+            if isinstance(card, Action):
                 return True
         return False
     
     def hasTreasures(self) -> bool:
         for card in self.hand:
-            if card is Treasure:
+            if isinstance(card, Treasure):
                 return True
         return False
 
