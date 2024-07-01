@@ -1,10 +1,10 @@
 import pytest
-from src.engine import card_models, card_structs, cards, game_state
+from src.engine.game_state import GameState, PlayerCountError
 
 
-def testPlayerCountLimits():
-    with pytest.raises(game_state.PlayerCountError):
-        game_state.GameState(['A'])
-    with pytest.raises(game_state.PlayerCountError):
-        game_state.GameState(['A', 'B', 'C', 'D', 'E'])
+def testPlayerCountLimits() -> None:
+    with pytest.raises(PlayerCountError):
+        GameState(['A'])
+    with pytest.raises(PlayerCountError):
+        GameState(['A', 'B', 'C', 'D', 'E'])
 
