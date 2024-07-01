@@ -1,4 +1,3 @@
-import pytest
 from src.engine.card_models import Card
 from src.engine.card_structs import Cardbuffer, Deck
 from src.engine.cards import Copper, Estate, Province
