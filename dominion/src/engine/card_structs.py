@@ -150,11 +150,11 @@ class Supply:
     def getCardsInSupply(self) -> list[Card]:
         return self.supplies.keys
     
-    async def gain(self, card: Card, location: Cardbuffer) -> None:
+    def gain(self, card: Card, location: Cardbuffer) -> None:
         self.getSupplyOf(card).drawTo(location)
-        await card.onGain()
+        card.onGain()
 
-    async def buy(self, card: Card) -> None:
+    def buy(self, card: Card) -> None:
         pass
     
     
@@ -163,7 +163,7 @@ class CardConditions:
                  minCost: int = -1, maxCost: int = math.inf, requiredCards: list[Card] = [], 
                  bannedCards: list[Card] = []) -> None:
         self.sets: list[Set] = sets
-        self.minExpansions: int = minExpansions
+        self.minExpansions: int = minExpansions 
         self.maxExpansions: int = maxExpansions
         self.minCost: int = minCost
         self.maxCost: int = maxCost

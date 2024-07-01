@@ -24,19 +24,19 @@ class Card:
     def getSupplyCount(self) -> int:
         return 10
 
-    async def onGain(self) -> None:
+    def onGain(self) -> None:
         pass
 
-    async def onPlay(self) -> None:
+    def onPlay(self) -> None:
         pass
 
-    async def onDiscard(self) -> None:
+    def onDiscard(self) -> None:
         pass
 
-    async def onCleanUp(self) -> None:
+    def onCleanUp(self) -> None:
         pass    
 
-    async def onTrash(self) -> None:
+    def onTrash(self) -> None:
         pass
 
     
@@ -74,7 +74,7 @@ class Treasure(Card):
     def getValue(self) -> int:
         return self.value
     
-    async def onPlay(self):
+    def onPlay(self):
         pass
 
 
