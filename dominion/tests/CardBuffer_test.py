@@ -1,6 +1,6 @@
 import pytest
 from src.engine.card_models import Card
-from src.engine.card_structs import Cardbuffer
+from src.engine.card_structs import Cardbuffer, Deck
 from src.engine.cards import Copper, Estate, Province
 
 
@@ -9,6 +9,12 @@ def makeBuffer(cards: list[Card]) -> Cardbuffer:
     buffer.cards = cards
     buffer.count = len(cards) 
     return buffer
+
+def makeDeck(cards: list[Card]) -> Deck:
+    deck: Deck = Deck()
+    deck.cards = cards
+    deck.count = len(cards) 
+    return deck
 
 def bufferHasCards(buffer: Cardbuffer, cards: list[Card]) -> bool:
     if buffer.count == len(cards) and buffer.cards == cards:
@@ -58,4 +64,39 @@ def testDumpTo() -> None:
     assert bufferHasCards(target, [Copper(), Estate(), Copper()])
 
 def testFilterInto() -> None:
-    pass
+    source: Cardbuffer = makeBuffer([Copper(), Estate(), Copper()])
+    target1: Cardbuffer = Cardbuffer()
+    target2: Cardbuffer = Cardbuffer()
+    def f(card: Card) -> Cardbuffer:
+        return target1 if isinstance(card, Copper) else target2
+    source.FilterInto(f)
+    assert bufferHasCards(source, [])
+    assert bufferHasCards(target1, [Copper(), Copper()])
+    assert bufferHasCards(target2, [Estate()])
+    source = makeBuffer([Copper(), Estate(), Copper()])
+    target1 = Cardbuffer()
+    target2 = Cardbuffer()
+    source.FilterInto(f, 2)
+    assert bufferHasCards(source, [Copper()])
+    assert bufferHasCards(target1, [Copper()])
+    assert bufferHasCards(target2, [Estate()])
+
+def testAddToTop() -> None:
+    deck: Deck = Deck()
+    deck.addToTop(Copper())
+    deck.addToTop(Estate())
+    deck.addToTop(Copper())
+    deck.addToTop(Province())
+    assert deck.cards == [Province(), Copper(), Estate(), Copper()]
+    assert deck.count == 4
+
+def testDrawTo() -> None:
+    deck: Deck = Deck()
+    target: Cardbuffer = Cardbuffer()
+    assert not deck.drawTo(target)
+    assert bufferHasCards(deck, [])
+    assert bufferHasCards(target, [])
+    deck = makeDeck([Copper(), Estate(), Copper()])
+    assert deck.drawTo(target)
+    assert bufferHasCards(deck, [Estate(), Copper()])
+    assert bufferHasCards(target, [Copper()])
